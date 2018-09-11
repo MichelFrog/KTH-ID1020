@@ -1,5 +1,6 @@
 package se.kth.id1020.labb6;
 
+import java.io.IOException;
 import java.util.*;
 
 /*
@@ -13,6 +14,7 @@ import java.util.*;
  * If an char is a closing bracket, the program check whether the stack is empty or if
  * the popped element is a corresponding opening bracket.
  * 
+ * try and catch to allow casting from system.in to char
  * 
  * @author michelouadria
  */
@@ -20,13 +22,12 @@ public class BalancedParantheses {
 
 	public static void main(String args[]) {
 
-		System.out.println(isParenthesesBalanced("[{HELLO]}"));
-		System.out.println(isParenthesesBalanced("[{}"));
-		System.out.println(isParenthesesBalanced("This is a sentence"));
-		System.out.println(isParenthesesBalanced("This is a sentence]"));
-		System.out.println(isParenthesesBalanced("12312412"));
-		System.out.println(isParenthesesBalanced(null));
-
+		
+	try {
+		System.out.println(isParenthesesBalanced((char)System.in.read()));
+	} catch (IOException e) {
+		e.printStackTrace();
+	}
 	}
 
 	/*
@@ -36,30 +37,32 @@ public class BalancedParantheses {
 	 * 
 	 * @return true(balanced) or false(not balanced)
 	 */
-	public static boolean isParenthesesBalanced(String stringOfChars) {
+	public static boolean isParenthesesBalanced(char input) {
 		Stack<Character> stack = new Stack<Character>();
+		char typedChar= ' ';
 		
-		
-		if(stringOfChars == null) {
-			System.out.print("Can't determine input ERROR: " + stringOfChars + " ");
-			return false;
-		}
-		for (int i = 0; i < stringOfChars.length(); i++) {
-			char element = stringOfChars.charAt(i);
 
-			if (element == '(' || element == '[' || element == '{') {
-				stack.push(element);
-			} else if (element == ')') {
+		while (typedChar != '\n') {
+			char element;
+			try {
+				typedChar = typedChar = (char) System.in.read();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+
+			if (typedChar == '(' || typedChar == '[' || typedChar == '{') {
+				stack.push(typedChar);
+			} else if (typedChar == ')') {
 				if (stack.isEmpty() || stack.pop() != ')') {
 					return false;
 				}
 
-			} else if (element == '[') {
+			} else if (typedChar == '[') {
 				if (stack.isEmpty() || stack.pop() != ']') {
 					return false;
 				}
 
-			} else if (element == '}') {
+			} else if (typedChar == '}') {
 				if (stack.isEmpty() || stack.pop() != '{') {
 					return false;
 				}
