@@ -10,6 +10,8 @@ import java.util.*;
  * 
  * If an opening bracket isn't follow by the correct closing bracket the parentheses
  * in the string isn't balanced.
+ * If an char is a closing bracket, the program check whether the stack is empty or if
+ * the popped element is a corresponding opening bracket.
  * 
  * 
  * @author michelouadria

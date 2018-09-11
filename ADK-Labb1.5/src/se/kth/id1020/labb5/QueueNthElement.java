@@ -8,10 +8,19 @@ import java.util.NoSuchElementException;
  * contains insert and dequeue, according to FIFO principle. The iterator is used 
  * for toString method to check if to fetch and print elements from each available node.
  * 
+ * @method<deleteAt> 
+ * If check whether the stack is empty OR chosen index is larger than the stack size 
+ * OR index 0 (Stack is 1-indexed)
+ * If index equals 1, perform regular dequeue by switching the headNode to nextNode.
+ * For iterate through the stack till it reaches the node BEFORE the targeted index 
+ * AND it isn't null.
+ * A tempNode store the node after the node we want to delete and sets the currentNodes
+ * next to the tempNode. I.E it skips the node and moves the node after one step back.
  * 
+ *   
  * @auther michelouadria
  * 
- *  * @param <E>
+ * @param <E>
  */
 public class QueueNthElement<E> implements Iterable<E> {
 
@@ -19,6 +28,7 @@ public class QueueNthElement<E> implements Iterable<E> {
 		QueueNthElement<String> input = new QueueNthElement<>();
 		System.out.println("Insert and delete an objext at index 1: ");
 		input.insert("1");
+		System.out.println(input);
 		input.deleteAt(1);
 		System.out.println(input);
 		
@@ -56,7 +66,6 @@ public class QueueNthElement<E> implements Iterable<E> {
 
 		/*
 		 * Constructor for node.
-		 * 
 		 * @param input Vale that is inserted in the node upon creation.
 		 */
 		public Node(E input) {
@@ -69,6 +78,9 @@ public class QueueNthElement<E> implements Iterable<E> {
 	private Node tailNode; // Last node in the list
 	private int size = 0;
 
+	/*
+	 *@return Check if headNode is null.  
+	 */
 	boolean isEmpty() {
 		return headNode == null;
 	}
@@ -102,6 +114,9 @@ public class QueueNthElement<E> implements Iterable<E> {
 	}
 	/*
 	 *A method for selecting a specific node and deleting it from the queue. 
+	 *
+	 *Sets the currentNode to equal head.
+	 *Checks whether it equals null, if the index sent in is less than the 
 	 */
 	public void deleteAt(int index) {
 		Node currentNode = headNode;
@@ -113,12 +128,9 @@ public class QueueNthElement<E> implements Iterable<E> {
 			dequeue();
 			return;
 		}
-
-		for (int j = 1; currentNode != null && j < index - 1; j++) {
+			
+		for (int j = 1; currentNode != null && j < index-1; j++) {
 			currentNode = currentNode.nextNode;
-		}
-		if (index > size) {
-			return;
 		}
 		Node tempNode = currentNode.nextNode.nextNode;
 		currentNode.nextNode = tempNode;
