@@ -1,113 +1,130 @@
 package se.kth.id1020.labb3;
+
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
+/*
+ * A generic iterable doubly linked list that allows for queuing and dequeuing
+ * node containing a string.  
+ * 
+ * @author michelouadria
+ * 
+ * @param <E>
+ */
 public class DLinkedList<E> implements Iterable<E> {
-    public static void main(String[] args) {
-        DLinkedList<String> input = new DLinkedList<>();
-        input.enqueue("1991");
-        input.enqueue("1010");
-        input.enqueue("Hello");
+	public static void main(String[] args) {
+		DLinkedList<String> input = new DLinkedList<>();
+		input.enqueue("1991");
+		input.enqueue("1010");
+		input.enqueue("Hello");
+		input.enqueue(null);
 
-        System.out.println("Result after enqueing objects: ");
-        System.out.println(input);
-        System.out.println("Removing: " + input.dequeue());
-        System.out.println("Result after dequeing objects: ");
-        System.out.println(input);
+		System.out.println("Result after enqueing objects: ");
+		System.out.println(input);
+		input.dequeue();
+		System.out.println("Result after dequeing objects: ");
+		System.out.println(input);
 
-    }
+	}
 
-    /* Class for pointers and storing input */
-    public class Node {
-        E data;        // Data for each node
-        Node prevNode; // Pointer for the previous node
-        Node nextNode; // Pointer for the next node
+	/* Class for pointers and storing input */
+	public class Node {
+		E data;
+		Node prevNode;
+		Node nextNode;
 
-        /*
-         * Constructor for node.
-         * 
-         * @param input Vale that is inserted in the node upon creation.
-         */
-        public Node(E input) {
-            this.data = input;
-        }
+		/*
+		 * Constructor for node.
+		 * 
+		 * @param input Vale that is inserted in the node upon creation.
+		 */
+		public Node(E input) {
+			this.data = input;
+		}
 
-    }
+	}
 
-    private Node headNode; // First node in the list
-    private Node tailNode; // Last node in the list
-    private int size;
+	private Node headNode;
+	private Node tailNode;
+	private int size;
 
-    public boolean isEmpty() {
-        return headNode == null;
-    }
+	public boolean isEmpty() {
+		return headNode == null;
+	}
 
-    /****** ENQUEUE *********/
-    /* Add an element at headNode */
-    public void enqueue(E newData) {
-        Node newNode = new Node(newData); // [newNode] -> [tailNode]
-        if(newData==null) {
-            System.out.println("Can't add an element of sort Null to stack");
-            return;
-        }
-        if (isEmpty()) {
-            headNode = newNode; // [headNode]-> [newNode]
-        } else {
-            newNode.nextNode = headNode;
-            headNode = newNode;
-            size++;
-        }
-    }
+	/****** ENQUEUE *********/
+	/* Add an element at headNode */
+	public void enqueue(E newData) {
+		Node newNode = new Node(newData); // [newNode] -> [tailNode]
+		if (newData == null) {
+			System.out.println("Can't add an element of sort Null to stack");
+			return;
+		}
+		if (isEmpty()) {
+			headNode = newNode; // [headNode]-> [newNode]
+		} else {
+			newNode.nextNode = headNode;
+			headNode = newNode;
+			size++;
+		}
+	}
 
-    /****** DEQUEUE *********/
-    public E dequeue() {
+	/****** DEQUEUE *********/
+	/* Remove an element at the headNode */
+	public E dequeue() {
 
-        E fetchedData = headNode.data; // Grab the first element from the head node
-        headNode = headNode.nextNode; // Set the
-        headNode.nextNode = null;
+		E fetchedData = headNode.data; // Grab the first element from the head node
+		if (isEmpty()) {
+			tailNode = null; // If its empty decrement the total node number
+			size--;
+		}
+		headNode = headNode.nextNode; // Set the headNode to nextNode, overwrite the headNode.
+		System.out.println("Removing: " + fetchedData);
+		return fetchedData;
+	}
 
-        if (isEmpty()) {
-            tailNode = null; // If its empty set null, decrement the total node number
-            size--;
-        }
-        return fetchedData;
-    }
+	/*
+	 * Read the linked list by iterating through and building string which will be
+	 * printed.
+	 */
+	@Override
+	public String toString() {
+		Iterator<E> iterator = iterator();
+		StringBuilder result = new StringBuilder();
+		String emptyList;
+		if (size == 0) {
+			return emptyList = "Queue is empty";
+		}
+		while (iterator.hasNext()) {
+			result.append("[");
+			result.append(iterator.next());
+			result.append("]");
+			result.append(",");
+		}
+		result.deleteCharAt(result.length() - 1);
+		return result.toString();
+	}
 
-    @Override
-    public String toString() {
-        Iterator<E> iterator = iterator();
-        StringBuilder result = new StringBuilder();
+	/****** ITERATOR *********/
+	public Iterator<E> iterator() {
+		return new ListIterator();
+	}
 
-        while (iterator.hasNext()) {
-            result.append("[");
-            result.append(iterator.next());
-            result.append("]");
-            result.append(",");
-        }
-        result.deleteCharAt(result.length() - 1);
-        return result.toString();
-    }
+	private class ListIterator implements Iterator<E> {
+		private Node currNode = headNode;
 
-    /****** ITERATOR *********/
-    public Iterator<E> iterator() {
-        return new ListIterator();
-    }
+		@Override
+		public boolean hasNext() {
+			return currNode != null;
+		}
 
-    private class ListIterator implements Iterator<E> {
-        private Node currNode = headNode;
+		@Override
+		public E next() {
 
-        @Override
-        public boolean hasNext() {
-            return currNode != null;
-        }
+			E data = currNode.data;
+			currNode = currNode.nextNode;
+			return data;
+		}
 
-        @Override
-        public E next() {
-
-            E data = currNode.data;
-            currNode = currNode.nextNode;
-            return data;
-        }
-
-    }
+	}
 }

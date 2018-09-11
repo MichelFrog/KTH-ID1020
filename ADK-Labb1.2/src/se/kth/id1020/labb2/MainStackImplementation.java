@@ -1,8 +1,9 @@
 package se.kth.id1020.labb2;
 import java.io.IOException;
 
-public class MainStackImplementation extends LIFO_Stack<Character> {
+public class MainStackImplementation extends LIFO_Stack<E> {
     public static void main(String[] args) throws IOException {
+    	
         LIFO_Stack<Character> stack = new LIFO_Stack<Character>(); 
         char typedChar= ' ';
         while (typedChar != '\n') {
@@ -13,4 +14,3 @@ public class MainStackImplementation extends LIFO_Stack<Character> {
         stack.PopAndPrintStack();
     }
 }
-

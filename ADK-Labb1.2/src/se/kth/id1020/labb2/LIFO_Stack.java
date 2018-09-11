@@ -14,21 +14,23 @@ import java.io.*;
  */
 public class LIFO_Stack<E> {
     E stack[];
-    int counter = 1;
+    int counter = 0;
     int size;
     
+    /*Recursive function that keep call itself till the */
     public void PopAndPrintStack() {
         
         if (isEmpty()) {
             return;
         } else {
-            if(this.counter !=0) {
+            if(this.size != 0) {
             System.out.print(",");
             }
             System.out.print("[");
             System.out.print(pop());
             System.out.print("]");
             PopAndPrintStack();
+            size--;
         }
     }
     
@@ -36,7 +38,7 @@ public class LIFO_Stack<E> {
         if(element == null) {
            System.out.println("Can't store null in stack");
         }
-        stack[++counter] = element;
+        stack[++size] = element;
     }
     
     E pop() {
@@ -51,5 +53,17 @@ public class LIFO_Stack<E> {
     
     private int size() {
         return this.size;
+    }
+    
+   public static void main(String[] args) throws IOException {
+    	
+        LIFO_Stack<Character> stack = new LIFO_Stack<Character>(); 
+        char typedChar= ' ';
+        while (typedChar != '\n') {
+            typedChar = (char) System.in.read();
+            stack.push(typedChar);
+        }
+        stack.pop();
+        stack.PopAndPrintStack();
     }
 }
