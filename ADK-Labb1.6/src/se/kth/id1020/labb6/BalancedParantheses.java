@@ -43,7 +43,6 @@ public class BalancedParantheses {
 		
 
 		while (typedChar != '\n') {
-			char element;
 			try {
 				typedChar = typedChar = (char) System.in.read();
 			} catch (IOException e) {
