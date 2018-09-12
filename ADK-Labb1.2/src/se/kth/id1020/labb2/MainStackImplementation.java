@@ -12,8 +12,10 @@ import java.io.IOException;
 public class MainStackImplementation {
     public static void main(String[] args) throws IOException {
     	
+
     		try {
         LIFO_Stack<Character> stack = new LIFO_Stack<Character>(); 
+        stack.pop();			//Test if the stack is empty and pop is performed
         char typedChar= ' ';
         while (typedChar != '\n') {
             typedChar = (char) System.in.read();

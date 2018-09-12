@@ -47,8 +47,7 @@ public class LIFO_Stack<E> {
 		if (isEmpty()) {
 			return;
 		} else {
-			if (this.size != 0) {
-				if(size != stopAtLastNode)
+			if(size != stopAtLastNode) {
 					System.out.print(",");
 			}
 			System.out.print("[");
@@ -74,11 +73,11 @@ public class LIFO_Stack<E> {
 	 * Unless null
 	 */
 	E pop() {
-		E fetchedElement = headNode.data;
-
 		if (isEmpty()) {
 			return null;
 		}
+		
+		E fetchedElement = headNode.data;
 		headNode = headNode.nextNode;
 		size--;
 		return fetchedElement;

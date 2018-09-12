@@ -22,7 +22,7 @@ public class BalancedParantheses {
 
 	public static void main(String args[]) {
 
-		
+	
 	try {
 		System.out.println(isParenthesesBalanced((char)System.in.read()));
 	} catch (IOException e) {
