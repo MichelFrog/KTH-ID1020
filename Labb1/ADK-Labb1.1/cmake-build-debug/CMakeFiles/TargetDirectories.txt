@@ -1,0 +1,3 @@
+/Users/michelouadria/CLionProjects/ADK-Labb1.1/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/Users/michelouadria/CLionProjects/ADK-Labb1.1/cmake-build-debug/CMakeFiles/edit_cache.dir
+/Users/michelouadria/CLionProjects/ADK-Labb1.1/cmake-build-debug/CMakeFiles/ADK_Labb1_1.dir
