@@ -93,7 +93,7 @@ public class LinkedListAcendingOrder<E> implements Iterator<E> {
             result.append("]");
             result.append(",");
             countToSize++;
-        }
+        }a
         result.deleteCharAt(result.length() - 1);
         return result.toString();
     }
