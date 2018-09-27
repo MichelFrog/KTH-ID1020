@@ -1,5 +1,8 @@
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.util.Iterator;
+import java.util.Queue;
 import java.util.Scanner;
 
 public class BinarySearchTreeQ2 {
@@ -67,10 +70,22 @@ public class BinarySearchTreeQ2 {
             return x;
         }
 
+
+
+        
+
     }
 
-    /* Class for implementation of and ordered BinaryST */
-    public static class OrderedBinaryST<Key extends Comparable<Key>, Value> {
+    
+    
+    
+    
+    
+    
+    /********************************************************************************* 
+     * Class for implementation of and ordered BinaryST 
+     * *******************************************************************************/
+    public static class OrderedBinaryST<Key extends Comparable<Key>, Value> implements Iterable<Key>{
         private Key[] keyArr;
         private Value[] valArr;
         private int N;
@@ -93,10 +108,10 @@ public class BinarySearchTreeQ2 {
         }
 
         public Value get(Key key) {
-            if (isEmpty())
+            if (isEmpty())          //Check if empty
                 return null;
 
-            int i = rank(key);
+            int i = rank(key);      //Find where key is located at
 
             if (i < N && keyArr[i].compareTo(key) == 0)
                 return valArr[i];
@@ -105,9 +120,10 @@ public class BinarySearchTreeQ2 {
         }
 
         public int rank(Key key) {
-            int lo = 0, hi = N - 1;
-            while (lo <= hi) {
+            int lo = 0, hi = N - 1;     //Start and end
+            while (lo <= hi) {          //While Start not equal hi 
                 int mid = lo + (hi - lo) / 2;
+
                 int cmp = key.compareTo(keyArr[mid]);
                 if (cmp < 0)
                     hi = mid - 1;
@@ -132,40 +148,88 @@ public class BinarySearchTreeQ2 {
             keyArr[i] = key;
             valArr[i] = val;
             N++;
+        }        
+        
+        private class KeyIterator<key> implements Iterator<Key>
+        {
+            private Key[] currentKey = keyArr;
+            private int size = N;
+            private int currentPos = 1;
+            
+            @Override
+            public boolean hasNext()
+            {
+                return size > 0;
+                
+            }
+            
+            @Override
+            public Key next() 
+            {
+                return currentKey[currentPos++];
+            }
+            
+        }
+
+        @Override
+        public Iterator<Key> iterator() {
+            return new KeyIterator();
         }
 
     }
 
-    public static void main(String[] args) {
-        Scanner readTxtFile = new Scanner(
-                "/Users/michelouadria/Documents/GitHub/KTH-ID1020/Labb3/Two Cities with only alphabet.txt");
+    public static void main(String[] args) throws FileNotFoundException {
+        
+        //Scanner and filreader WORKS
+        FileReader readTxt = new FileReader
+                ("/Users/michelouadria/Documents/GitHub/KTH-ID1020/Labb3/Two Cities with only alphabet.txt");
+        Scanner readTxtFile = new Scanner(readTxt);
 
-        int minlen = Integer.parseInt(args[0]);
+        int minlen = 100;
 
-        OrderedBinaryST<String, Integer> OrdBST = new OrderedBinaryST<String, Integer>(minlen);
-
-        int amountOfWordsToBeRead = 100; // Max length of words to read
-
-        for (int i = 0; i < amountOfWordsToBeRead; i++) {
-
+        OrderedBinaryST<String, Integer> binarySearchST = new OrderedBinaryST<String, Integer>(minlen);
+        
+        int amountOfWordsToRead = 99;
             while (readTxtFile.hasNext()) { // Build symbol table and count frequencies.
-                String word = readTxtFile.next();
-                if (word.length() < minlen)
+                String word = readTxtFile.next(); //Read the next string from the file 
+                if (word.length() < 1)  //Disregard small words
                     continue; // Ignore short keys.
-                if (!OrdBST.contains(word))
-                    OrdBST.put(word, 1);
+                if (!binarySearchST.contains(word))
+                    binarySearchST.put(word, 1);//At first
                 else
-                    OrdBST.put(word, OrdBST.get(word) + 1);
+                    binarySearchST.put(word, binarySearchST.get(word) + 1); //Increase the value of said key
+                if(-1 == amountOfWordsToRead){ //Stop after 100 words
+                    break;
+                }
+                amountOfWordsToRead--;
             }
-            // Find a key with the highest frequency count.
-            String max = "";
-            OrdBST.put(max, 0);
-            for (String word : OrdBST.keyArr) {
-                if (OrdBST.get(word) > OrdBST.get(max))
-                    max = word;
-                System.out.println(max + " " + OrdBST.get(max));
-            }
+//            Iterator iteratorTEST = binarySearchST.iterator();
 
-        }
+//            while(iteratorTEST.hasNext()) {
+//                String wordTest = (String)iteratorTEST.next();
+//                int amount = binarySearchST.get((String)iteratorTEST.next());
+//                System.out.println(wordTest + " " + amount);
+//            }            
+            // Find a key with the highest frequency count.
+            
+            
+            
+            /*FOR BINARYSEARCHST*/
+            String max = "";
+            binarySearchST.put(max, 0);
+            Iterator<String> iterator = binarySearchST.iterator();
+            while(iterator.hasNext() && null != iterator.next()) {
+                String word = (String)iterator.next();
+                if (binarySearchST.get(word) > binarySearchST.get(max)) {
+                    max = word;
+                System.out.println(max + " " + binarySearchST.get(max));   
+                }
+            }
+            
+
     }
+            
+            
+
 }
+
