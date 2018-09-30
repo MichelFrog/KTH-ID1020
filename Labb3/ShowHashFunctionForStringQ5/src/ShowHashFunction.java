@@ -12,63 +12,66 @@ import java.util.Scanner;
  * 
  * */
 public class ShowHashFunction {
-    
-    public static void main(String[]args ) throws FileNotFoundException {
+
+    public static void main(String[] args) throws FileNotFoundException {
 
         /************************
          * BINARY SEARCH TREE
          **************************************/
-
+        int amountOfWords = 0;
+        FileReader readTemp = new FileReader(
+                "/Users/michelouadria/Documents/GitHub/KTH-ID1020/Labb3/Two Cities with only alphabet.txt");
+        Scanner readTxt = new Scanner(readTemp);
+        while (readTxt.hasNext()) {
+            if (null == readTxt.next())
+                break;
+            amountOfWords++;
+        }
+        System.out.println("Total wordcount in text: " + amountOfWords);
         // Scanner and filreader WORKS
         FileReader readTxtForBST = new FileReader(
                 "/Users/michelouadria/Documents/GitHub/KTH-ID1020/Labb3/Two Cities with only alphabet.txt");
         Scanner readTxtFileForBST = new Scanner(readTxtForBST);
 
         BST<String, Integer> BinarySearchTree = new BST<String, Integer>();
-        
-        int counter = 1;
+        BST<Integer, String> BinarySearchTreeOfHash = new BST<Integer, String>();
+
+        int counter = 0;
         int DistinctWordsInText = 0;
-        int minlen = 3;
-        int amountOfWords = 100;
+        int collison = 0;
 
         long startTimeForBST = System.currentTimeMillis();
         while (readTxtFileForBST.hasNext()) { // Build symbol table and count
             String word = readTxtFileForBST.next(); // Read the next string from the file
+            int hashValue = word.toString().hashCode();
             counter++;
             if (null == word) {
                 System.out.println("Found null");
             }
-            if (word.length() < minlen) // Disregard small words
-                continue; // Ignore short keys.
-            if (!BinarySearchTree.contains(word)) {
+            if (!BinarySearchTree.contains(word)) { // Add new word to the tree
                 BinarySearchTree.put(word, 1);
                 DistinctWordsInText++;
             } else {
-                BinarySearchTree.put(word, BinarySearchTree.get(word) + 1); // Increase the value of said key
+                BinarySearchTree.put(word, BinarySearchTree.get(word) + 1);
+            }
+
+            if (!BinarySearchTreeOfHash.contains(hashValue)) { // Add new hashValue(int) to tree with the word(String)
+                BinarySearchTreeOfHash.put(hashValue, word);
+            } else if (!BinarySearchTreeOfHash.get(hashValue).equals(word)) {
+                collison++;
+                System.out.println("Collision #" + collison + ":\n" + "The collison occured with hashCode: [" + hashValue
+                        + "], which belongs to both [" + word + "] & [" + BinarySearchTreeOfHash.get(hashValue) + "]");
             }
             if (amountOfWords == counter) {
                 break;
             }
         }
-        System.out.println("Check if distinct words equal size of Tree");
-        System.out.println("Distinct words in text: " + DistinctWordsInText);
-        System.out.println("Size of BinarySearchTree: " + BinarySearchTree.size());
-        System.out.println("---------------------");
-
-
         /* FOR BINARY SEARCH TREE */
-        String BSTmax = "";
-        BinarySearchTree.put(BSTmax, 0);
-        for (String word : BinarySearchTree.keys()) {
-            if (BinarySearchTree.get(word) > BinarySearchTree.get(BSTmax)) {
-                BSTmax = word;
-            }
-        }
         long stopTimeBST = System.currentTimeMillis();
         long elapsedTimeBST = stopTimeBST - startTimeForBST;
-        System.out.println("Excution for Binary Search Tree: " + elapsedTimeBST + "ms");
-        System.out.println(BSTmax + " " + BinarySearchTree.get(BSTmax));
         System.out.println();
-        
+        System.out.println("Probability of collision: " + collison +" out of "+amountOfWords );
+        System.out.println("Excution for Binary Search Tree: " + elapsedTimeBST + "ms");
+
     }
 }
