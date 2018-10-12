@@ -1,19 +1,19 @@
+package Question2;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.util.Scanner;
 
 /**
- * Implementation of an undirected graph that relies on an adjacent List.
  * @author michelouadria
  *
  */
-public class UndirectedGraph {
+public class Digraph {
 
 	private final int V;
 	private int edge;
 	private Bag<Integer>[] adjList; // list of each adjacent node with no order, hence bag.
 
-	public UndirectedGraph(int vertex) {
+	public Digraph(int vertex) {
 		this.V = vertex;
 		this.edge = 0;
 		adjList = (Bag<Integer>[]) new Bag[V];
@@ -21,8 +21,8 @@ public class UndirectedGraph {
 			adjList[vi] = new Bag<Integer>();
 		}
 	}
-
-
+	
+	
 	public int getV() {
 		return V;
 	}
@@ -33,9 +33,19 @@ public class UndirectedGraph {
 
 	public void addEdge(int vertex, int nextVertex) {
 		adjList[vertex].add(nextVertex);
-		adjList[nextVertex].add(vertex);
 		edge++;
-
+	}
+	
+	public Digraph reverseGraph()
+	{
+		Digraph Reversed = new Digraph(V);
+		for(int v = 0; v < V; v++) {
+			for(int nextV: adj(v)) {
+				Reversed.addEdge(v, nextV);
+				}
+		}
+		return Reversed;
+		
 	}
 
 	public Iterable<Integer> adj(int v) {
@@ -63,34 +73,5 @@ public class UndirectedGraph {
 		}
 		return s;
 	}
-/*
-    public static int degree(UndirectedGraph G, int v) {
 
-        int degree = 0;
-        for (int w : G.adj(v))
-            degree++;
-        return degree;
-    }
-
-    public static int maxDegree(UndirectedGraph G) {
-        int max = 0;
-        for (int v = 0; v < G.getV(); v++)
-            if (degree(G, v) > max)
-                max = degree(G, v);
-        return max;
-    }
-
-    public static int avgDegree(UndirectedGraph G) {
-        return 2 * G.getEdge() / G.getV();
-    }
-
-    public static int numberOfSelfLoops(UndirectedGraph G) {
-        int count = 0;
-        for (int v = 0; v < G.getV(); v++)
-            for (int w : G.adj(v))
-                if (v == w)
-                    count++;
-        return count / 2; // each edge counted twice
-    }
- */
 }

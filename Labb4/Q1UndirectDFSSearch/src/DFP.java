@@ -1,4 +1,9 @@
-
+/*
+ * Implementation of Depth first path that performs depth first search and the path
+ * taken by the algorithm.
+ * 
+ * @author michelouadria 
+ */
 public class DFP {
 	private boolean[] markedVertex;
 	private int[] edgeTo;
@@ -12,8 +17,32 @@ public class DFP {
 	   dfs(G, startingVertex);
 	}
 	
+	/*
+	 * Implementation of depth first search.
+	 */
 	public void dfs(UndirectedGraph G, int vertex) 
 	{
+		markedVertex[vertex] = true;
+		for (int nextVertex : G.adj(vertex)) 
+		{
+			if (!markedVertex[nextVertex])
+			{
+				edgeTo[nextVertex] = vertex;
+				dfs(G, nextVertex);
+			}
+		}
+	}
+	/*
+	 * Finds the shortest path and pushes each vertex along
+	 * the path to a stack.
+	 * 
+	 */
+	public void findShortestDFP(UndirectedGraph G, int vertex) 
+	{
+		LIFO_Stack<Integer> path = new LIFO_Stack<Integer>();
+		path.push(vertex);
+
+		
 		markedVertex[vertex] = true;
 		for (int nextVertex : G.adj(vertex)) 
 		{
@@ -38,6 +67,6 @@ public class DFP {
 	        for (int x = y; x != start; x = edgeTo[x])
 	           path.push(x);
 	        path.push(start);
-	        return (Iterable<Integer>) path;
+	        return  path;
 	}
 }

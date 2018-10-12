@@ -3,7 +3,6 @@ import java.io.InputStream;
 import java.util.Scanner;
 
 /**
- * Implementation of an undirected graph that relies on an adjacent List.
  * @author michelouadria
  *
  */
@@ -43,6 +42,34 @@ public class UndirectedGraph {
 	}
 
 
+	public static int degree(UndirectedGraph G, int v) {
+
+		int degree = 0;
+		for (int w : G.adj(v))
+			degree++;
+		return degree;
+	}
+
+	public static int maxDegree(UndirectedGraph G) {
+		int max = 0;
+		for (int v = 0; v < G.getV(); v++)
+			if (degree(G, v) > max)
+				max = degree(G, v);
+		return max;
+	}
+
+	public static int avgDegree(UndirectedGraph G) {
+		return 2 * G.getEdge() / G.getV();
+	}
+
+	public static int numberOfSelfLoops(UndirectedGraph G) {
+		int count = 0;
+		for (int v = 0; v < G.getV(); v++)
+			for (int w : G.adj(v))
+				if (v == w)
+					count++;
+		return count / 2; // each edge counted twice
+	}
 
 	public String toString() {
 		String s = V + " vertices, " + edge + " edges\n";
@@ -63,34 +90,5 @@ public class UndirectedGraph {
 		}
 		return s;
 	}
-/*
-    public static int degree(UndirectedGraph G, int v) {
 
-        int degree = 0;
-        for (int w : G.adj(v))
-            degree++;
-        return degree;
-    }
-
-    public static int maxDegree(UndirectedGraph G) {
-        int max = 0;
-        for (int v = 0; v < G.getV(); v++)
-            if (degree(G, v) > max)
-                max = degree(G, v);
-        return max;
-    }
-
-    public static int avgDegree(UndirectedGraph G) {
-        return 2 * G.getEdge() / G.getV();
-    }
-
-    public static int numberOfSelfLoops(UndirectedGraph G) {
-        int count = 0;
-        for (int v = 0; v < G.getV(); v++)
-            for (int w : G.adj(v))
-                if (v == w)
-                    count++;
-        return count / 2; // each edge counted twice
-    }
- */
 }

@@ -1,0 +1,136 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1504\cocoasubrtf830
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\fnil\fcharset0 Monaco;}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue0;}
+{\*\expandedcolortbl;;\csgenericrgb\c0\c0\c0;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww10800\viewh8400\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\qc\partightenfactor0
+
+\f0\fs24 \cf0 LABB 4\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf0 Michel Ouadria\
+19910108\
+\
+
+\fs32 PART ONE\
+
+\fs24 \
+Question 1:\
+\pard\pardeftab720\partightenfactor0
+
+\f1 \cf2 49 vertices\
+0[AL], \
+1[FL], 2[GA], 3[MS], \
+4[TN], 5[AR], 6[LA], \
+7[MO], 8[OK], 9[TX], \
+10[AZ], 11[CA], 12[NM], \
+13[NV], 14[UT], 15[OR], \
+16[CO], 17[KS], 18[NE], \
+19[WY], 20[CT], 21[MA], \
+22[NY], 23[RI], 24[DC], \
+25[MD], 26[VA], 27[DE], \
+28[NJ], 29[PA], 30[NC], \
+31[SC], 32[IA], 33[IL], \
+34[MN], 35[SD], 36[WI], \
+37[ID], 38[MT], 39[WA], \
+40[IN], 41[KY], 42[MI], \
+43[OH], 44[WV], 45[NH], \
+46[VT], 47[ME], 48[ND], \
+\
+Pick as starting vertex from the vertices above: \
+FL\
+To which vertex do you want to find shortest path?\
+SC\
+\
+FL to SC: FL-GA-TN-VA-NC-SC\
+\pard\pardeftab720\partightenfactor0
+\cf2 \
+Question 2:\
+49 vertices\
+1[FL], 2[GA], 3[MS], \
+4[TN], 5[AR], 6[LA], \
+7[MO], 8[OK], 9[TX], \
+10[AZ], 11[CA], 12[NM], \
+13[NV], 14[UT], 15[OR], \
+16[CO], 17[KS], 18[NE], \
+19[WY], 20[CT], 21[MA], \
+22[NY], 23[RI], 24[DC], \
+25[MD], 26[VA], 27[DE], \
+28[NJ], 29[PA], 30[NC], \
+31[SC], 32[IA], 33[IL], \
+34[MN], 35[SD], 36[WI], \
+37[ID], 38[MT], 39[WA], \
+40[IN], 41[KY], 42[MI], \
+43[OH], 44[WV], 45[NH], \
+46[VT], 47[ME], 48[ND], \
+\
+Pick as starting vertex from the vertices above: \
+FL\
+To which vertex do you want to find shortest path?\
+SC\
+\
+FL to SC: FL-GA-SC\
+\
+
+\fs32 PART 2\
+
+\fs24 \
+Question 1:\
+
+\fs22 49 vertices\
+0[AL], \
+1[FL], 2[GA], 3[MS], \
+4[TN], 5[AR], 6[LA], \
+7[MO], 8[OK], 9[TX], \
+10[AZ], 11[CA], 12[NM], \
+13[NV], 14[UT], 15[OR], \
+16[CO], 17[KS], 18[NE], \
+19[WY], 20[CT], 21[MA], \
+22[NY], 23[RI], 24[DC], \
+25[MD], 26[VA], 27[DE], \
+28[NJ], 29[PA], 30[NC], \
+31[SC], 32[IA], 33[IL], \
+34[MN], 35[SD], 36[WI], \
+37[ID], 38[MT], 39[WA], \
+40[IN], 41[KY], 42[MI], \
+43[OH], 44[WV], 45[NH], \
+46[VT], 47[ME], 48[ND], \
+\
+Pick a starting vertex from the vertices above: \
+FL\
+To which vertex do you want to find shortest path?\
+SC\
+Is there a path between the two points? true\
+\
+Question 2:\
+
+\fs24 49 vertices\
+0[AL], \
+1[FL], 2[GA], 3[MS], \
+4[TN], 5[AR], 6[LA], \
+7[MO], 8[OK], 9[TX], \
+10[AZ], 11[CA], 12[NM], \
+13[NV], 14[UT], 15[OR], \
+16[CO], 17[KS], 18[NE], \
+19[WY], 20[CT], 21[MA], \
+22[NY], 23[RI], 24[DC], \
+25[MD], 26[VA], 27[DE], \
+28[NJ], 29[PA], 30[NC], \
+31[SC], 32[IA], 33[IL], \
+34[MN], 35[SD], 36[WI], \
+37[ID], 38[MT], 39[WA], \
+40[IN], 41[KY], 42[MI], \
+43[OH], 44[WV], 45[NH], \
+46[VT], 47[ME], 48[ND], \
+\
+Directed cycle: FL GA SC AR LA MT FL \
+\
+Question 3:\
+13 vertices\
+0[TA], \
+1[TB], 2[TF], 3[TC], \
+4[TD], 5[TE], 6[TG], \
+7[TH], 8[TI], 9[TJ], \
+10[TK], 11[TL], 12[TM], \
+\
+TJ->TK->TL->TM->TI->TH->TG->TD->TC->TA->TB->TF->TE\
+}
