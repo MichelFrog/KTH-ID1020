@@ -4,7 +4,7 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 /**
- * Main for the topolgical sort.
+ * Main for the topological sort.
  * 
  * @author michelouadria
  *
